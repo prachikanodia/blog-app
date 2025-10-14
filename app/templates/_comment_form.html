@@ -1,0 +1,16 @@
+{# expects: post, user_id in context #}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Leave a comment</h5>
+
+
+      <form action="{{ url_for('core.comment', post_slug=post.slug) }}" method="post">
+        <div class="mb-3">
+          <textarea name="comment" class="form-control" rows="3" placeholder="Write your comment..." required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Post Comment</button>
+      </form>
+    
+  </div>
+</div>
