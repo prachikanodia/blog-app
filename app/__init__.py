@@ -36,8 +36,7 @@ def create_app():
 
     
     db.init_app(app)
-    mail.init_app(app)
-
+    
     # blueprints
     from .routes.core import bp as core_bp
     from .routes.auth import bp as auth_bp
