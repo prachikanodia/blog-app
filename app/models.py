@@ -2,15 +2,6 @@ from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
 from .extensions import db
 
-class Contacts(db.Model):
-    # sno,name,email,phone_num,msg.date
-    sno= db.Column(db.Integer, primary_key=True)
-    name= db.Column(db.String(80), nullable=False)
-    email= db.Column(db.String(30), nullable=False)
-    phone_num= db.Column(db.String(30), nullable=False)
-    msg= db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=True, server_default=func.current_timestamp())
-
 class Posts(db.Model):
     __tablename__ = 'posts'
     sno = db.Column(db.Integer, primary_key=True)
@@ -18,7 +9,6 @@ class Posts(db.Model):
     slug = db.Column(db.String(64), nullable=False)
     content = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, server_default=func.current_timestamp())
-    img_file = db.Column(db.String(225), nullable=False)
     tagline = db.Column(db.String(160), nullable=False)
     poster_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=False)
     postcomment=db.relationship('Comments', backref='postc')
