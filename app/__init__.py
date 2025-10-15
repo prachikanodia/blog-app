@@ -31,10 +31,16 @@ def create_app():
     app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
     app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
 
-    LOCAL_SERVER = as_bool(os.getenv("LOCAL_SERVER"), True)
-    local_uri = os.getenv("LOCAL_DB_URI")
-    prod_uri  = os.getenv("PROD_DB_URI")
-    app.config["SQLALCHEMY_DATABASE_URI"] = local_uri if LOCAL_SERVER else prod_uri
+    
+    uri = (os.getenv("DATABASE_URL")
+           or os.getenv("MYSQL_URL")
+           or "mysql+pymysql://root:root@127.0.0.1:8889/CodingThunder")
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql+psycopg2://", 1)
+    if uri.startswith("mysql://"):
+        uri = uri.replace("mysql://", "mysql+pymysql://", 1)
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # init extensions
