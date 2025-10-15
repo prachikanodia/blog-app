@@ -10,6 +10,6 @@
     "about_text": "Hi, my name is prachi and i am an ambitious person",
     "no_of_posts":1,
     "login_image": "login.svg",
-    "upload_location": "//Users//prachikanodia//Desktop//flask//app//static//assets//img"
+    "upload_location": "//static//assets//img"
   }
 }
