@@ -1,7 +1,6 @@
 import math, os
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, flash, current_app, session
-from flask_mail import Message
 from ..extensions import db
 from ..models import Posts, Users, Comments
 from ..utils import login_required
