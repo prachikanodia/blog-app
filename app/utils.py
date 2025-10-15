@@ -9,7 +9,7 @@ def login_required(view):
     @wraps(view)
     def wrapper(*args, **kwargs):
         if "user_id" not in session:
-            return redirect(url_for("login", next=request.url))
+            return redirect(url_for("auth.login", next=request.url))
         return view(*args, **kwargs)
     return wrapper
 
