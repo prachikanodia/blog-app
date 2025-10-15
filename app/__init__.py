@@ -1,7 +1,7 @@
 import os, json
 from dotenv import load_dotenv
 from flask import Flask
-from .extensions import db, mail
+from .extensions import db
 
 def as_bool(v, default=False):
     if v is None:
@@ -21,29 +21,6 @@ def create_app():
 
     
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-only-fallback")
-    upload_dir = app.config["PARAMS"].get("upload_location", "static/assets/img")
-    upload_dir = os.path.normpath(upload_dir)
-
-    if not os.path.isabs(upload_dir):
-        upload_dir = os.path.join(os.getcwd(), upload_dir)
-    try:
-        os.makedirs(upload_dir, exist_ok=True)
-    except Exception:
-        upload_dir = "/tmp/uploads"
-        os.makedirs(upload_dir, exist_ok=True)
-
-    app.config["UPLOAD_FOLDER"] = upload_dir
-
-    app.config.update(
-        MAIL_SERVER=os.getenv("MAIL_SERVER", "smtp.gmail.com"),
-        MAIL_PORT=int(os.getenv("MAIL_PORT", "587")),
-        MAIL_USE_TLS=as_bool(os.getenv("MAIL_USE_TLS", "True")),
-        MAIL_USE_SSL=as_bool(os.getenv("MAIL_USE_SSL", "False")),
-        MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
-        MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
-        MAIL_DEFAULT_SENDER=os.getenv("MAIL_DEFAULT_SENDER") or os.getenv("MAIL_USERNAME"),
-        MAIL_SUPPRESS_SEND=os.getenv("MAIL_SUPPRESS_SEND", "False").lower() == "true",
-    )
 
     
     uri = (os.getenv("DATABASE_URL")
