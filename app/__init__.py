@@ -22,6 +22,7 @@ def create_app():
     
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-only-fallback")
     upload_dir = app.config["PARAMS"].get("upload_location", "static/assets/img")
+    upload_dir = os.path.normpath(upload_dir)
 
     if not os.path.isabs(upload_dir):
         upload_dir = os.path.join(os.getcwd(), upload_dir)
