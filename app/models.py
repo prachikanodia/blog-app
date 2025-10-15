@@ -18,7 +18,7 @@ class Posts(db.Model):
     slug = db.Column(db.String(64), nullable=False)
     content = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=True, server_default=func.current_timestamp())
-    img_file = db.Column(db.String(225), nullable=True)
+    img_file = db.Column(db.String(225), nullable=False)
     tagline = db.Column(db.String(160), nullable=False)
     poster_id = db.Column(db.Integer, db.ForeignKey('Users.user_id'), nullable=False)
     postcomment=db.relationship('Comments', backref='postc')
