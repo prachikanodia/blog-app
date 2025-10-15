@@ -35,7 +35,7 @@ def create_app():
 
     app.config.update(
         MAIL_SERVER=os.getenv("MAIL_SERVER", "smtp.gmail.com"),
-        MAIL_PORT=int(os.getenv("MAIL_PORT", "465")),
+        MAIL_PORT=int(os.getenv("MAIL_PORT", "587")),
         MAIL_USE_TLS=os.getenv("MAIL_USE_TLS", "False"),
         MAIL_USE_SSL=os.getenv("MAIL_USE_SSL", "True"),
         MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
